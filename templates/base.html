@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -7,16 +8,30 @@
     <title>투개더</title>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
     <style>
-        /* 커스텀 스타일이 필요하면 여기에 추가 */
         header {
-            padding: 2rem 0;
-            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+            text-align: center;
+            height: 4rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: inherit;
+            font-size: 3rem;
+            background: none !important;
+            padding: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
         }
 
         footer {
-            margin-top: 3rem;
-            padding: 2rem 0;
-            border-top: 1px solid #eee;
+            margin-top: 2rem;
+            padding: 1rem 0;
             color: #666;
         }
 
@@ -25,17 +40,87 @@
             margin: 0 auto;
             padding: 0 1rem;
         }
+
+        .slider-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .slide-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: slideShow 25s infinite;
+        }
+
+        .slide-image:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .slide-image:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .slide-image:nth-child(3) {
+            animation-delay: 10s;
+        }
+
+        .slide-image:nth-child(4) {
+            animation-delay: 15s;
+        }
+
+        .slide-image:nth-child(5) {
+            animation-delay: 20s;
+        }
+
+        @keyframes slideShow {
+            0% {
+                opacity: 0;
+                transform: scale(1.1) translateX(2%);
+            }
+
+            5% {
+                opacity: 0.4;
+            }
+
+            20% {
+                opacity: 0.4;
+            }
+
+            25% {
+                opacity: 0;
+                transform: scale(1.1) translateX(-2%);
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <div class="slider-container">
+        <div class="slide-image" style="background-image: url({% static 'traveler/images/bg1.png' %});"></div>
+        <div class="slide-image" style="background-image: url({% static 'traveler/images/bg2.png' %});"></div>
+        <div class="slide-image" style="background-image: url({% static 'traveler/images/bg3.png' %});"></div>
+        <div class="slide-image" style="background-image: url({% static 'traveler/images/bg4.png' %});"></div>
+        <div class="slide-image" style="background-image: url({% static 'traveler/images/bg5.png' %});"></div>
+    </div>
     <header>
         <div class="container">
             <nav>
                 <a href="{% url 'traveler:index' %}"><strong>✈️ TourGather</strong></a>
-                <ul>
-                    <li><a href="{% url 'traveler:form' %}">여행 추천받기</a></li>
-                </ul>
             </nav>
         </div>
     </header>
@@ -47,7 +132,7 @@
 
     <footer>
         <div class="container">
-            <small>&copy; 2025 TourGather. Powered by OpenAI & Django.</small>
+            <small>&copy; 2025 TourGather. Powered by OpenAI & Django.<br>Made by Windy</small>
         </div>
     </footer>
 </body>

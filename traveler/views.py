@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from openai import OpenAI
+from tavily import TavilyClient
 from dotenv import load_dotenv
 import os
 
@@ -61,9 +62,30 @@ def result(request):
             temperature=0.8,
         )
         
+        content = response.choices[0].message.content
+        destination = ""
+        
+        for line in content.split('\n'):
+            destination = line.replace("추천 여행지:", "").strip()
+            break
+        
+        tavily_api_key = os.getenv('TAVILY_API_KEY')
+        image_url = None
+        
+        if tavily_api_key:
+            try:
+                tavily = TavilyClient(api_key=tavily_api_key)
+
+                search_result = tavily.search(query=f"{destination} beautiful scenery", search_depth="basic", include_images=True, max_results=1)
+                if 'images' in search_result and search_result['images']:
+                    image_url = search_result['images'][0]
+            except Exception as e:
+                print(f"Tavily Search Error: {e}")
+
         context = {
             'user_mood': user_mood,
-            'result': response.choices[0].message.content
+            'result': content,
+            'image_url': image_url
         }
 
     except Exception as e:
