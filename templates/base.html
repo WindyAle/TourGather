@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>투개더</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    <style>
+        /* 커스텀 스타일이 필요하면 여기에 추가 */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="{% url 'traveler:index' %}"><strong>✈️ TourGather</strong></a>
+                <ul>
+                    <li><a href="{% url 'traveler:form' %}">여행 추천받기</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <small>&copy; 2025 TourGather. Powered by OpenAI & Django.</small>
+        </div>
+    </footer>
+</body>
+
+</html>

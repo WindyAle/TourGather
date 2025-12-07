@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <header>
+        <h2>당신의 멋진 계획을 알려주세요</h2>
+    </header>
+
+    <form action="{% url 'traveler:result' %}" method="post">
+        {% csrf_token %}
+
+        <label for="user_mood">어떤 여행을 원하시나요?</label>
+        <textarea name="user_mood" id="user_mood" cols="30" rows="5"
+            placeholder="예: 회사에서 탈출하고 싶어! 아무도 나를 찾지 않는 조용한 마을에서 칵테일 마시면서 힐링하기!" required></textarea>
+
+        <button type="submit">완벽한 여행지 추천 받기</button>
+    </form>
+</section>
+{% endblock %}

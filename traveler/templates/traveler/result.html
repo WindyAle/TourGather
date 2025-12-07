@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <header>
+        <h2>✈️ 당신만을 위한 추천 여행지</h2>
+    </header>
+
+    <article style="background-color: #f9f9f9; padding: 2rem; border-radius: 8px;">
+        <blockquote>
+            "{{ user_mood }}"
+        </blockquote>
+        <p>라고 말씀하신 당신에게...</p>
+        <hr>
+
+        <div style="font-size: 1.1rem; line-height: 1.6;">
+            {{ result|linebreaks }}
+        </div>
+    </article>
+
+    <br>
+    <div style="text-align: center;">
+        <a href="{% url 'traveler:form' %}" role="button" class="secondary">다른 여행지 추천받기</a>
+        <a href="{% url 'traveler:index' %}">홈으로 돌아가기</a>
+    </div>
+</section>
+{% endblock %}
